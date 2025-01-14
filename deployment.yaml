@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-demo-back
+#  labels:
+#    app: k8s-demo-back
+spec:
+  replicas: 3
+  template:
+    metadata:
+#      name: k8s-demo-back
+      labels:
+        app: k8s-demo-back
+    spec:
+      containers:
+        - name: k8s-demo-back
+          image: barsu4ello/k8s-demo-back:latest
+#          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 8080 # Носит информативный характер для других разработчиков (по факту ни на что не влияет)
+#      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: k8s-demo-back
